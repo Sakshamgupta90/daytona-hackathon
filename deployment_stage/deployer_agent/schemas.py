@@ -36,7 +36,7 @@ class MCPBundle(BaseModel):
             ],
             entrypoint_file="server.py",
             env_vars=self.env_vars,
-            test_commands=["python3 run_tests.py"],
+            test_commands=["python run_tests.py"],
             test_protocol=self.test_protocol,
         )
 

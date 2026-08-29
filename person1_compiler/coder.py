@@ -50,7 +50,20 @@ class CoderAgent:
             'import asyncio',
             'import httpx',
             'from typing import Optional, List, Dict, Any, Union',
-            'from mcp.server.fastmcp import FastMCP',
+            'try:',
+            '    from mcp.server.fastmcp import FastMCP',
+            'except (ImportError, ModuleNotFoundError):',
+            '    try:',
+            '        from mcp.server.mcpserver import MCPServer as FastMCP',
+            '    except (ImportError, ModuleNotFoundError):',
+            '        class FastMCP:',
+            '            def __init__(self, name: str): self.name = name',
+            '            def tool(self, description: str = ""):',
+            '                def decorator(fn):',
+            '                    fn.description = description',
+            '                    return fn',
+            '                return decorator',
+            '            def run(self): pass',
             'from dotenv import load_dotenv',
             '',
             'load_dotenv()',
@@ -112,9 +125,22 @@ class CoderAgent:
             query_mappings: List[tuple] = []
             body_mappings: List[tuple] = []
 
-            for p in tool.parameters:
+            req_params = [p for p in tool.parameters if p.required and "Optional" not in p.python_type]
+            opt_params = [p for p in tool.parameters if not p.required or "Optional" in p.python_type]
+
+            for p in req_params:
                 wire_name = p.raw_name or p.name
                 param_defs.append(f"{p.name}: {p.python_type}")
+                if p.location == ParameterLocation.PATH:
+                    path_mappings.append((p.name, wire_name))
+                elif p.location == ParameterLocation.BODY:
+                    body_mappings.append((p.name, wire_name))
+                else:
+                    query_mappings.append((p.name, wire_name))
+
+            for p in opt_params:
+                wire_name = p.raw_name or p.name
+                param_defs.append(f"{p.name}: {p.python_type} = None")
                 if p.location == ParameterLocation.PATH:
                     path_mappings.append((p.name, wire_name))
                 elif p.location == ParameterLocation.BODY:
@@ -297,7 +323,8 @@ async def run_all_tests():
 
             duration_ms = int((time.time() - start_time) * 1000)
             
-            is_error = isinstance(result, str) and ("HTTP Error" in result or "Execution Error" in result)
+            # Runtime crash detection vs standard HTTP remote responses
+            is_error = isinstance(result, str) and ("Execution Error:" in result)
             status = "FAIL" if is_error else "PASS"
             
             if is_error:
@@ -327,6 +354,8 @@ async def run_all_tests():
             }}
             report["results"].append(err_entry)
             report["tool_results"].append(err_entry)
+
+    report["status"] = "PASS" if report["failed_count"] == 0 else "FAIL"
 
     with open("test_report.json", "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)

@@ -1,3 +1,4 @@
+import os
 import logging
 from typing import Optional
 from .schemas import CoderOutput, DeployerOutput
@@ -47,8 +48,12 @@ class DeployerAgent:
 
             logger.info(f"Uploaded {len(uploaded_paths)} files directly to Sandbox.")
 
-            # 4. Execute setup script (e.g. bash setup.sh)
+            # 4. Execute setup script (e.g. bash setup.sh or pip install on Windows)
             setup_res = self.sandbox_manager.exec_command(workspace_id, "bash setup.sh")
+            if setup_res["exit_code"] != 0 and os.name == "nt":
+                # Fallback on Windows without WSL
+                setup_res = self.sandbox_manager.exec_command(workspace_id, "pip install -r requirements.txt --quiet")
+
             if setup_res["exit_code"] != 0:
                 logger.error(f"Setup Script Failed inside Sandbox:\n{setup_res['stderr']}")
                 # Cleanup the sandbox immediately to avoid resource leaks

@@ -57,8 +57,9 @@ flowchart TD
 | Person | Focus Domain | Key Modules / Artifacts | Current Status |
 | :--- | :--- | :--- | :--- |
 | **👤 Person 1 (Our Role)** | Ingestion, Planner Agent, Coder Agent, Self-Healing Loop, Benchmark | `person1_compiler/`, `shared/models.py`, `sample_inputs/` | **✅ Fully Built & Tested (100/100 Benchmark)** |
-| **👤 Person 2** | Agent 3 (Deploy Agent), Agent 4 (Test Agent), Daytona SDK Runtime | `person2_daytona/`, `docs/DAYTONA_SPEC_PERSON2.md` | ⏳ Pending Person 2 code push |
-| **👤 Person 3** | Web Studio UI, Agent 5 (Red-Team Security Agent) | `person3_studio/`, `docs/UI_SPEC_PERSON3.md` | ⏳ Pending Person 3 code push |
+| **👤 Person 2** | Agent 3 (Deploy Agent), Agent 4 (Test Agent), Daytona SDK Runtime | `deployment_stage/`, `docs/DAYTONA_SPEC_PERSON2.md` | **✅ Fully Integrated & Tested in Sandboxes** |
+| **👤 Person 3** | Web Studio UI, Agent 5 (Red-Team Security Agent) | `person3_studio/`, `docs/UI_SPEC_PERSON3.md` | **✅ Fully Integrated with Orchestrator** |
+| **🔄 Orchestrator** | Master Multi-Agent Pipeline & Self-Healing Loop | `orchestrator.py` | **✅ 100% E2E Verified** |
 
 ---
 

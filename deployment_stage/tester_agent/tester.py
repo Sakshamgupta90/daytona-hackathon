@@ -49,15 +49,13 @@ class TesterAgent:
     # ─────────────────────────────────────────────
     #  Public entry point
     # ─────────────────────────────────────────────
+    def test(self, deployer_output) -> TesterOutput:
+        """Alias for run()."""
+        return self.run(deployer_output)
+
     def run(self, deployer_output) -> TesterOutput:
         """
         Main entry point. Accepts a DeployerOutput object from Deployer Agent.
-
-        Args:
-            deployer_output: DeployerOutput from Agent 3 (Deployer Agent)
-
-        Returns:
-            TesterOutput with status TESTS_PASSED or TESTS_FAILED
         """
         workspace_id   = deployer_output.workspace_id
         project_name   = deployer_output.project_name
