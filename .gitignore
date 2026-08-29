@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local workspace and ide
+*.code-workspace
+.vscode/
+.idea/
+.DS_Store
+*.log

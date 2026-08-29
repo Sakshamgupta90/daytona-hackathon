@@ -1,0 +1,201 @@
+{
+  "spec_format": "openapi_json",
+  "service_name": "GitHubIssues",
+  "base_url": "https://api.github.com",
+  "auth": {
+    "auth_type": "bearer",
+    "header_name": "Authorization",
+    "query_param_name": null,
+    "env_var_name": "GITHUB_TOKEN",
+    "test_token": null
+  },
+  "spec_content": {
+    "openapi": "3.0.3",
+    "info": {
+      "title": "GitHub Issues & Repositories API",
+      "description": "Essential endpoints for managing repositories, issues, and issue comments.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api.github.com"
+      }
+    ],
+    "paths": {
+      "/repos/{owner}/{repo}": {
+        "get": {
+          "summary": "Get repository details",
+          "description": "Retrieves public repository information including description, stars, forks, and default branch.",
+          "operationId": "get_repository",
+          "parameters": [
+            {
+              "name": "owner",
+              "in": "path",
+              "required": true,
+              "description": "The account owner of the repository.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repo",
+              "in": "path",
+              "required": true,
+              "description": "The name of the repository without the .git extension.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Repository details retrieved successfully."
+            }
+          }
+        }
+      },
+      "/repos/{owner}/{repo}/issues": {
+        "get": {
+          "summary": "List repository issues",
+          "description": "Lists issues in a repository. Can filter by state (open, closed, all) and page.",
+          "operationId": "list_issues",
+          "parameters": [
+            {
+              "name": "owner",
+              "in": "path",
+              "required": true,
+              "description": "The account owner of the repository.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repo",
+              "in": "path",
+              "required": true,
+              "description": "The name of the repository.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "state",
+              "in": "query",
+              "required": false,
+              "description": "Indicates the state of the issues to return.",
+              "schema": {
+                "type": "string",
+                "enum": ["open", "closed", "all"],
+                "default": "open"
+              }
+            },
+            {
+              "name": "per_page",
+              "in": "query",
+              "required": false,
+              "description": "Results per page (max 100).",
+              "schema": {
+                "type": "integer",
+                "default": 30
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of issues."
+            }
+          }
+        },
+        "post": {
+          "summary": "Create an issue",
+          "description": "Creates a new issue in the specified repository.",
+          "operationId": "create_issue",
+          "parameters": [
+            {
+              "name": "owner",
+              "in": "path",
+              "required": true,
+              "description": "The account owner of the repository.",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repo",
+              "in": "path",
+              "required": true,
+              "description": "The name of the repository.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["title"],
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "The title of the issue."
+                    },
+                    "body": {
+                      "type": "string",
+                      "description": "The contents of the issue."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Issue created."
+            }
+          }
+        }
+      },
+      "/repos/{owner}/{repo}/issues/{issue_number}/comments": {
+        "get": {
+          "summary": "List comments on an issue",
+          "description": "Lists all comments posted on a specific issue or pull request.",
+          "operationId": "list_issue_comments",
+          "parameters": [
+            {
+              "name": "owner",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "repo",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "issue_number",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of issue comments."
+            }
+          }
+        }
+      }
+    }
+  }
+}
