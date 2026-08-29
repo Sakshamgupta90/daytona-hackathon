@@ -1,0 +1,29 @@
+{
+  "report_id": "0b3e1d18-a915-4da0-aca1-c3faac67f3d3",
+  "timestamp": "2026-08-29T06:47:17.200208+00:00",
+  "project_name": "missing-dep-mcp-server",
+  "workspace_id": "mock-ws-e7f9813f",
+  "total_tests": 1,
+  "passed_tests": 0,
+  "failed_tests": 1,
+  "failed_cases": [
+    {
+      "command": "python3 test_server.py",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-e7f9813f/test_server.py\", line 5, in <module>\n    spec.loader.exec_module(server)   # ModuleNotFoundError fires here\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-e7f9813f/server.py\", line 5, in <module>\n    import mcp_nonexistent_lib_xyz   # will ALWAYS fail: ModuleNotFoundError\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'mcp_nonexistent_lib_xyz'\n"
+    }
+  ],
+  "failure_locations": [
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-e7f9813f/test_server.py:5",
+    "<frozen importlib._bootstrap_external>:940",
+    "<frozen importlib._bootstrap>:241",
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-e7f9813f/server.py:5"
+  ],
+  "root_cause_summary": "Missing dependency: No module named 'mcp_nonexistent_lib_xyz'",
+  "suggestions": [
+    "Add 'No module named 'mcp_nonexistent_lib_xyz'' to requirements.txt and re-run setup.sh",
+    "Verify that setup.sh runs 'pip install -r requirements.txt' before executing tests."
+  ],
+  "overall_status": "FAIL"
+}

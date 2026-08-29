@@ -1,0 +1,4 @@
+# Project dependencies for MCP Forge - Deployer & Tester Agents
+daytona>=0.207.0
+python-dotenv>=1.0.0
+pydantic>=2.0.0

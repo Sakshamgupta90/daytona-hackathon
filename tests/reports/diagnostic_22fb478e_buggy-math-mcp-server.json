@@ -1,0 +1,27 @@
+{
+  "report_id": "22fb478e-bcb1-4044-9533-bc36019d3ece",
+  "timestamp": "2026-08-29T07:06:39.006303+00:00",
+  "project_name": "buggy-math-mcp-server",
+  "workspace_id": "mock-ws-effd4764",
+  "total_tests": 1,
+  "passed_tests": 0,
+  "failed_tests": 1,
+  "failed_cases": [
+    {
+      "command": "python3 test_server.py",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-effd4764/test_server.py\", line 37, in <module>\n    test_add()\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-effd4764/test_server.py\", line 14, in test_add\n    assert result == 7, f\"add(3, 4) expected 7 but got {result}\"\n           ^^^^^^^^^^^\nAssertionError: add(3, 4) expected 7 but got -1\n"
+    }
+  ],
+  "failure_locations": [
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-effd4764/test_server.py:37",
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-effd4764/test_server.py:14"
+  ],
+  "root_cause_summary": "An assertion in a test function evaluated to False.",
+  "suggestions": [
+    "Review the test logic in test_server.py \u2014 check expected vs. actual return values.",
+    "Ensure the MCP server functions return the exact types and values the tests expect."
+  ],
+  "overall_status": "FAIL"
+}

@@ -1,0 +1,1 @@
+"""Passing math-server scenario."""
