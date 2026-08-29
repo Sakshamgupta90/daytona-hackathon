@@ -1,0 +1,26 @@
+{
+  "report_id": "d8a339d7-61aa-406a-884a-ce004a4ce7c5",
+  "timestamp": "2026-08-29T07:17:53.259302+00:00",
+  "project_name": "buggy-math-mcp-server",
+  "workspace_id": "mock-ws-a50aff43",
+  "total_tests": 1,
+  "passed_tests": 0,
+  "failed_tests": 1,
+  "failed_cases": [
+    {
+      "command": "python3 test_server.py",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-a50aff43/test_server.py\", line 5, in <module>\n    assert server.add(3, 4) == 7, 'add() returned the wrong value'\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: add() returned the wrong value\n"
+    }
+  ],
+  "failure_locations": [
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-a50aff43/test_server.py:5"
+  ],
+  "root_cause_summary": "An assertion in a test function evaluated to False.",
+  "suggestions": [
+    "Review the test logic in test_server.py \u2014 check expected vs. actual return values.",
+    "Ensure the MCP server functions return the exact types and values the tests expect."
+  ],
+  "overall_status": "FAIL"
+}

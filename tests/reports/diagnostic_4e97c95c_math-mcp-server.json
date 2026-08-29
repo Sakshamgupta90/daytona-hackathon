@@ -1,0 +1,27 @@
+{
+  "report_id": "4e97c95c-ff1b-4dfd-8e29-62f8b662e0cf",
+  "timestamp": "2026-08-29T06:45:36.006713+00:00",
+  "project_name": "math-mcp-server",
+  "workspace_id": "mock-ws-886c9cd9",
+  "total_tests": 1,
+  "passed_tests": 0,
+  "failed_tests": 1,
+  "failed_cases": [
+    {
+      "command": "python3 test_server.py",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-886c9cd9/test_server.py\", line 51, in <module>\n    test_add()\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-886c9cd9/test_server.py\", line 16, in test_add\n    assert server.add(0.1, 0.2) == pytest_approx(0.3)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "failure_locations": [
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-886c9cd9/test_server.py:51",
+    "/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-886c9cd9/test_server.py:16"
+  ],
+  "root_cause_summary": "An assertion in a test function evaluated to False.",
+  "suggestions": [
+    "Review the test logic in test_server.py \u2014 check expected vs. actual return values.",
+    "Ensure the MCP server functions return the exact types and values the tests expect."
+  ],
+  "overall_status": "FAIL"
+}

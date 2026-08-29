@@ -1,0 +1,39 @@
+{
+  "run_at": "2026-08-29T15:06:40.484077",
+  "sandbox_mode": "MOCK",
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "cases": [
+    {
+      "case": 1,
+      "label": "Correct Math MCP Server (all tests pass)",
+      "expected": "TESTS_PASSED",
+      "actual": "TESTS_PASSED",
+      "passed": true,
+      "workspace_id": "mock-ws-d7c94827",
+      "duration_s": 1.9,
+      "report_id": null
+    },
+    {
+      "case": 2,
+      "label": "Buggy Math MCP Server (wrong return values)",
+      "expected": "TESTS_FAILED",
+      "actual": "TESTS_FAILED",
+      "passed": true,
+      "workspace_id": "mock-ws-effd4764",
+      "duration_s": 1.33,
+      "report_id": "22fb478e-bcb1-4044-9533-bc36019d3ece"
+    },
+    {
+      "case": 3,
+      "label": "Missing Dependency Server (numpy not installed)",
+      "expected": "TESTS_FAILED",
+      "actual": "TESTS_FAILED",
+      "passed": true,
+      "workspace_id": "mock-ws-03c0686e",
+      "duration_s": 1.47,
+      "report_id": "28b9a31d-b60f-46b6-8d02-2ae60a708ce6"
+    }
+  ]
+}

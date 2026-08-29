@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "stage": "functional_test",
+  "sandbox_id": "mock-ws-a50aff43",
+  "failing_tool": "python3 test_server.py",
+  "error_category": "runtime_crash",
+  "tested_payload": {},
+  "error_message": "An assertion in a test function evaluated to False.",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/sakshamgupta/Desktop/daytona-hackathon/mock_sandboxes/mock-ws-a50aff43/test_server.py\", line 5, in <module>\n    assert server.add(3, 4) == 7, 'add() returned the wrong value'\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: add() returned the wrong value\n",
+  "suggested_fix": "Review the test logic in test_server.py \u2014 check expected vs. actual return values."
+}
