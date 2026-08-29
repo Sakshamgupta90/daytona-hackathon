@@ -2,7 +2,7 @@
 Tester Agent - Core Agent (Agent 4)
 Orchestrates: execute tests → evaluate results → route to Agent 5 (Security)
 or generate structured diagnostic report → route to Agent 1 (Planner).
-Cleans up the Daytona sandbox after evaluation regardless of outcome.
+Leaves the Daytona sandbox active after evaluation for follow-up agents.
 """
 import json
 import logging
@@ -34,7 +34,7 @@ class TesterAgent:
       3a. SUCCESS → prints "Sending to Agent 5 (Security)" + hands off payload.
       3b. FAIL    → builds structured DiagnosticReport JSON → prints "Sending to
                     Agent 1 (Planner)" + saves report to disk.
-      4. Deletes the Daytona sandbox workspace (cleanup).
+      4. Leaves the Daytona sandbox workspace active for inspection or handoff.
     """
 
     def __init__(self, report_output_dir: str = "./tester_reports"):
@@ -113,8 +113,9 @@ class TesterAgent:
             )
 
         finally:
-            # ── Step 4: Always destroy the sandbox ──
-            self._cleanup_sandbox(sandbox_mgr, workspace_id)
+            # ── Step 4: Retain sandbox for the next agent / inspection ──
+            logger.info(f"Keeping sandbox active after testing: {workspace_id}")
+            print(f"\n🟢 Sandbox [{workspace_id}] retained after testing.\n")
 
         return output
 
@@ -144,6 +145,9 @@ class TesterAgent:
         print("=" * 60)
         print("\n📤 Sending verified payload to Agent 5 (Security Agent)...")
         print("   [Agent 5 not yet implemented — stub handoff below]\n")
+        print("📁 Developer bundle paths available to Agent 5:")
+        for file_path in deployer_output.deployed_files:
+            print(f"   - {file_path}")
 
         handoff_payload = {
             "project_name"   : project_name,
